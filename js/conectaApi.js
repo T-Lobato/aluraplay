@@ -10,7 +10,7 @@ async function criaVideo(titulo, descricao, url, imagem) {
         method: "POST",
         headers: {
             "Content-type": "application/json"
-        }, 
+        },
         body: JSON.stringify({
             titulo: titulo,
             descricao: `${descricao} mil visualizações`,
@@ -18,7 +18,9 @@ async function criaVideo(titulo, descricao, url, imagem) {
             imagem: imagem
         })
     });
-
+    if (!conexao.ok) {
+        throw new Error("Não foi possível enviar o vídeo");
+    }
     const conexaoConvertida = conexao.json();
 
     return conexaoConvertida;
